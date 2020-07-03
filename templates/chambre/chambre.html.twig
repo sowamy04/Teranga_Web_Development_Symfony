@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ChambreController!{% endblock %}
+
+{% block body %}
+<div class="card mt">
+    <div class="d-flex justify-content-center mt-1">
+        <button type="button" name="" data-toggle="modal" data-target="#subscribe-modal" id="" class="btn btn-primary">Ajouter une nouvelle chambre</button>
+    </div>
+    <div class="card-body table-responsive-sm" id="scrollable">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Numero Chambre</th>
+                <th scope="col">Type chambre</th>
+                <th scope="col">Modifier</th>
+                <th scope="col">Supprimer</th>
+            </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-around">
+            <button type="button" class="btn btn-primary" id="previous">Precedent</button>
+            <button type="button" class="btn btn-primary" id="next">Suivant</button>
+        </div>
+    </div>
+</div>
+    
+ {% endblock %}

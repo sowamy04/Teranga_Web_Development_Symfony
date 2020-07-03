@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EtudiantController!{% endblock %}
+
+{% block body %}
+    <div class="card mt">
+        <div class="d-flex justify-content-between mt-2">
+            <button type="button" name="" data-toggle="modal" data-target="#subscribe-modal" id="addNewStudent" class="btn btn-primary">Ajouter un nouveau etudiant</button>
+            <form class="form-inline my-2 my-lg-0" method="POST" action="">
+                <input class="form-control mr-sm-2" type="search" placeholder="Rechercher un Etudiant" aria-label="Search" name="terme">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" name="rechercher">Search</button>
+            </form>
+        </div> 
+        <div class="card-body table-responsive-sm">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Matricule</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">email</th>
+                        <th scope="col">Téléphone </th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Modifier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr> 
+                    </tr>
+                    <?php  endforeach; ?>
+                </tbody>
+            </table>
+            <br>
+            
+        </div>
+    </div>
+
+
+{% endblock %}
