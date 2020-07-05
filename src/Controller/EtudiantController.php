@@ -10,7 +10,7 @@ class EtudiantController extends AbstractController
     /**
      * @Route("/etudiant", name="etudiant")
      */
-    public function index() 
+    public function index()
     {
         return $this->render('etudiant/etudiant.html.twig', [
             'controller_name' => 'EtudiantController',

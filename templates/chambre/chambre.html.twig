@@ -3,9 +3,35 @@
 {% block title %}Hello ChambreController!{% endblock %}
 
 {% block body %}
-<div class="card mt">
+<div class="modal fade" id="setType">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Enregister une chambre</h1>
+                <button type="button" class="close" data-dismiss="modal">x</button>
+            </div>
+            <div class="modal-body"> 
+                {{ form_start (chambreForm) }}
+                        {{ form_row (chambreForm.numChambre) }} 
+                        {{ form_row (chambreForm.numBatiment) }} 
+
+                        {{ form_row (chambreForm.type) }}
+
+                     <div class="d-flex justify-content-around">
+                        <button type="submit" class="btn btn-primary" id="ajouter" name="ajouter">Ajouter</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                    </div>
+
+                {{ form_end (chambreForm) }}
+            </div>
+            <div class="modal-footer"> </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mt-5 mb-5">
     <div class="d-flex justify-content-center mt-1">
-        <button type="button" name="" data-toggle="modal" data-target="#subscribe-modal" id="" class="btn btn-primary">Ajouter une nouvelle chambre</button>
+        <a name="" id="" class="btn btn-primary" href="" role="button" data-toggle="modal" data-target="#setType"> Ajouter une nouvelle chambre</a>
     </div>
     <div class="card-body table-responsive-sm" id="scrollable">
         <table class="table table-striped">
@@ -27,5 +53,4 @@
         </div>
     </div>
 </div>
-    
- {% endblock %}
+{% endblock %}
