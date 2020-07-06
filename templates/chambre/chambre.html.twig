@@ -31,7 +31,7 @@
 
     <div class="card mt-5 mb-5">
         <div class="d-flex justify-content-center mt-1">
-            <a name="" id="" class="btn btn-primary" href="" role="button" data-toggle="modal" data-target="#setType"> Ajouter une nouvelle chambre</a>
+            <button type="addRoom" name="" id="" class="btn btn-primary" href="" role="button" data-toggle="modal" data-target="#setType"> Ajouter une nouvelle chambre</button>
         </div>
         <div class="card-body table-responsive-sm" id="scrollable">
             <table class="table table-striped">
@@ -44,7 +44,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                    
+                    {% for room in rooms %}
+                        <tr>
+                            <td>{{ room.numChambre}}</td>
+                            <td>{{ room.type}}</td>
+                            <td><a href="{{ path("delete_room",{"id":room.id}) }}" class="update"><img src="{{ asset("img/ic-liste-active.png")}}" /></a></td>
+                            <td><a href="{{ path("delete_room",{"id":room.id}) }}" class="delete"><img src="{{ asset("img/ic-supprimer.png")}}" /></a></td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
             <div class="d-flex justify-content-around">
@@ -53,4 +60,7 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset("js/room.js")}}"></script>
 {% endblock %}

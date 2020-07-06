@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Entity;
-
-use App\Repository\EtudiantRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EtudiantRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EtudiantRepository::class)
@@ -18,37 +18,36 @@ class Etudiant
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=10)
-     */
-    private $matricule;
-
-    /**
-     * @ORM\Column(type="string", length=35)
+     * @ORM\Column(type="string", length=30)
+     * @Assert\Length(min = 2,minMessage = "La longueur minimale est de 2 caracteres.")
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=75)
+     * @Assert\Length(min = 2,minMessage = "La longueur minimale est de 4 caracteres.")
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex(pattern="/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/", message="Un email valide est sous la forme exemple@exemple.com") 
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=25)
+     * @Assert\Regex(pattern="/^(002217|7)(0|7|8){1}[0-9]{7}/", message="Un nummero valide est sous la forme 7xxxxxxxx") 
      */
     private $telephone;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $dateNaissance;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $dateInscription;
 
@@ -67,20 +66,19 @@ class Etudiant
      */
     private $adresse;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Chambre::class, inversedBy="etudiants")
+     */
+    private $chambre;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $matricule;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getMatricule(): ?string
-    {
-        return $this->matricule;
-    }
-
-    public function setMatricule(string $matricule): self
-    {
-        $this->matricule = $matricule;
-        return $this;
     }
 
     public function getNom(): ?string
@@ -91,6 +89,7 @@ class Etudiant
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
         return $this;
     }
 
@@ -102,6 +101,7 @@ class Etudiant
     public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
+
         return $this;
     }
 
@@ -113,6 +113,7 @@ class Etudiant
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -124,6 +125,7 @@ class Etudiant
     public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
+
         return $this;
     }
 
@@ -135,6 +137,7 @@ class Etudiant
     public function setDateNaissance(\DateTimeInterface $dateNaissance): self
     {
         $this->dateNaissance = $dateNaissance;
+
         return $this;
     }
 
@@ -146,6 +149,7 @@ class Etudiant
     public function setDateInscription(\DateTimeInterface $dateInscription): self
     {
         $this->dateInscription = $dateInscription;
+
         return $this;
     }
 
@@ -157,6 +161,7 @@ class Etudiant
     public function setTypeEtudiant(string $typeEtudiant): self
     {
         $this->typeEtudiant = $typeEtudiant;
+
         return $this;
     }
 
@@ -168,6 +173,7 @@ class Etudiant
     public function setPension(?float $pension): self
     {
         $this->pension = $pension;
+
         return $this;
     }
 
@@ -179,6 +185,31 @@ class Etudiant
     public function setAdresse(?string $adresse): self
     {
         $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getChambre(): ?Chambre
+    {
+        return $this->chambre;
+    }
+
+    public function setChambre(?Chambre $chambre): self
+    {
+        $this->chambre = $chambre;
+
+        return $this;
+    }
+
+    public function getMatricule(): ?string
+    {
+        return $this->matricule;
+    }
+
+    public function setMatricule(string $matricule): self
+    {
+        $this->matricule = $matricule;
+
         return $this;
     }
 }

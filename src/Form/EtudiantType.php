@@ -2,9 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\Chambre;
 use App\Entity\Etudiant;
+use App\Form\ChambreType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -31,22 +35,32 @@ class EtudiantType extends AbstractType
             ])
             ->add('dateNaissance', DateType::class, [
                 // renders it as a single text box
-                'widget' => 'single_text',
+                'widget' => 'single_text'
             ])
             ->add('dateInscription', DateType::class, [
                 // renders it as a single text box
-                'widget' => 'single_text',
+                'widget' => 'single_text'
             ])
             ->add('typeEtudiant',ChoiceType::class,[
                 "choices" => [
-                    "Choisir le Status de l'etudiant" => null,
                     "Boursier Loge" => "boursier logé",
                     "Boursier Non Loge" => "boursier non logé",
                     "Non Boursier" => "non boursier",
                 ]
             ])
-            // ->add('pension')
-            // ->add('adresse')
+            ->add('pension',ChoiceType::class,[
+                "choices" => [
+                    "20000" => "20000",
+                    "40000" => "40000",
+                ]
+            ])
+            ->add('adresse',TextType::class,[
+                "attr" => ["placeholder" => "Votre adresse"]
+            ])
+            ->add("chambre",EntityType::class,[
+                "class" => Chambre::class,
+                "choice_label" => "numChambre"
+            ])
         ;
     }
 
@@ -54,6 +68,7 @@ class EtudiantType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Etudiant::class,
+            'csrf_protection' => false,
         ]);
     }
 }
