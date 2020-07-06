@@ -6,6 +6,7 @@ use App\Repository\ChambreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ChambreRepository::class)
@@ -21,6 +22,7 @@ class Chambre
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Assert\NotBlank
      */
     private $numChambre;
 
@@ -31,6 +33,7 @@ class Chambre
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
      */
     private $numBatiment;
 

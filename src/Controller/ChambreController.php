@@ -36,21 +36,26 @@ class ChambreController extends AbstractController
         // }
         $em->remove($room);
         $em->flush();
-        return $this->redirectToRoute("chambre");;
+        return $this->redirectToRoute("chambre");
     }
     /**
      * @Route("/chambre/{id<\d+>}/update", name="update_room")
      */
-    public function update(Request $request,ChambreRepository $chambreRepositoy,Chambre $room): Response
+    public function update(Request $request,ChambreRepository $chambreRepositoy,EntityManagerInterface $em,Chambre $room)
     {
-        dd($room);
-        $chambre = new Chambre();
-        // $rooms = $chambreRepositoy->
-        $form= $this->createForm(ChambreType::class, $chambre);
-        return $this->render('chambre/chambre.html.twig', [
+        
+        $rooms = $chambreRepositoy->findAll();
+        $form= $this->createForm(ChambreType::class, $room);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            dump($room);
+            $em->flush();
+            return $this->redirectToRoute("chambre");
+        }
+        
+        return $this->render('chambre/update.html.twig', [
             'controller_name' => 'ChambreController',
             'chambreForm' => $form->createView(),
-            "rooms" => $rooms
         ]);
     }
 

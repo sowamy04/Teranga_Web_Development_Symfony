@@ -48,7 +48,7 @@
                         <tr>
                             <td>{{ room.numChambre}}</td>
                             <td>{{ room.type}}</td>
-                            <td><a href="{{ path("delete_room",{"id":room.id}) }}" class="update"><img src="{{ asset("img/ic-liste-active.png")}}" /></a></td>
+                            <td><a href="{{ path("update_room",{"id":room.id}) }}" class="update"><img src="{{ asset("img/ic-liste-active.png")}}" /></a></td>
                             <td><a href="{{ path("delete_room",{"id":room.id}) }}" class="delete"><img src="{{ asset("img/ic-supprimer.png")}}" /></a></td>
                         </tr>
                     {% endfor %}

@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ChambreController!{% endblock %}
+
+{% block body %}
+    <div class="card mt-5 mb-5 h-100">
+        <div id="alert"></div>
+        <div class="card-body table-responsive-sm" id="scrollable">
+            {{ form_start (chambreForm,{
+                "attr":{
+                    "id":"chambreForm"
+                }
+            }) }}
+                {{ form_row (chambreForm.numChambre) }} 
+                <div class="my-custom-class-for-errors show-error text-danger">
+                    {{ form_errors(chambreForm) }}
+                </div>
+                {{ form_row (chambreForm.numBatiment) }}
+                <div class="my-custom-class-for-errors show-error text-danger">
+                    {{ form_errors(chambreForm) }}
+                </div>
+                {{ form_row (chambreForm.type) }}
+                <div class="my-custom-class-for-errors show-error text-danger">
+                    {{ form_errors(chambreForm) }}
+                </div>
+                <div class="d-flex justify-content-around">
+                    <button type="submit" class="btn btn-primary" id="ajouter" name="ajouter">Ajouter</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="cancel">Annuler</button>
+                </div>
+            {{ form_end (chambreForm) }}
+        </div>
+    </div>
+    <div class="h-25"></div> 
+{% endblock %}
+{% block javascripts %}
+    <script>
+        const selects = document.querySelectorAll("select");
+        let hasError = false;
+        const alert = `
+                    <div class="alert alert-danger" role="alert">
+                        Tout les champs sont obligatoires 
+                    </div>
+                `;
+        const showError = (message="") => {
+            $("#alert").html(message);
+        };
+        for(select of selects) {
+            $(select).on("change", function () {
+                hasError = false;
+                showError();
+            });
+        };
+        $("#chambreForm").on("submit", function (event) {
+            for(select of selects){
+                const value = select.value;
+                console.log(value);
+                if(select.value == 0){
+                    hasError = true;
+                    showError(alert);
+                }
+            }
+            if(hasError){
+                event.preventDefault();
+            }
+        });
+        $("#cancel").on("click", function () {
+            document.location.assign('{{ path("chambre") }}')
+        });
+    </script> 
+{% endblock %}
