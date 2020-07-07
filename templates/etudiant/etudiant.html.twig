@@ -3,6 +3,35 @@
 {% block title %}Hello EtudiantController!{% endblock %}
 
 {% block body %}
+<div class="modal fade" id="subscribe-modal-update">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title text-center" id="title">Modifier Etudiant</h1>
+                <!-- <button type="button" class="close" data-dismiss="modal">x</button> -->
+            </div>
+            <div class="modal-body" id="msg">
+                    {{ form_start (etudiantForm) }}
+                        {{ form_row (etudiantForm.matricule) }} 
+                        {{ form_row (etudiantForm.nom) }} 
+                        {{ form_row (etudiantForm.prenom) }} 
+                        {{ form_row (etudiantForm.email) }} 
+                        {{ form_row (etudiantForm.telephone) }} 
+                        {{ form_row (etudiantForm.dateNaissance) }} 
+                        {{ form_row (etudiantForm.typeEtudiant) }} 
+
+                     <div class="d-flex justify-content-around">
+                        <input type="submit" value="Modifier" class="btn btn-primary" id="modifier"/>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                    </div>
+
+                {{ form_end (etudiantForm) }}
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="card mt">
         <div class="d-flex justify-content-between mt-2">
             <button type="button" name="" data-toggle="modal" data-target="#subscribe-modal" id="addNewStudent" class="btn btn-primary">Ajouter un nouveau etudiant</button>
@@ -20,13 +49,25 @@
                         <th scope="col">Prénom</th>
                         <th scope="col">email</th>
                         <th scope="col">Téléphone </th>
+                        <th scope="col">Date de naissance </th>
                         <th scope="col">Type</th>
                         <th scope="col">Modifier</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {%  for etudiant in etudiants %}
                     <tr> 
+                        <th scope="row">{{ etudiant.matricule }}</th>
+                        <td>{{ etudiant.nom }}</td>
+                        <td>{{ etudiant.prenom }}</td>
+                        <td>{{ etudiant.email }}</td>
+                        <td>{{ etudiant.telephone }} </td>
+                        <td>{{ etudiant.dateNaissance|date('d/m/Y')}} </td>
+                        <td>{{ etudiant.typeEtudiant }}</td>
+                        <td><a href="" data-target="#subscribe-modal-update" data-toggle="modal"> <img src="../../public/assets/Images/ic-liste-active.png"> </a></td>
                     </tr>
+
+                    {% endfor %}
                 </tbody>
             </table>
             <br>
