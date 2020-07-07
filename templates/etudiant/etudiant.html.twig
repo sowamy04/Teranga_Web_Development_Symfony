@@ -24,7 +24,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr></tr>
+                    {% for studentList in students %}
+                        {% for student in studentList %}
+                            <tr>
+                                <td>{{ student.matricule}}</td>
+                                <td>{{ student.nom}}</td>
+                                <td>{{ student.prenom}}</td>
+                                <td>{{ student.email}}</td>
+                                <td>{{ student.telephone}}</td>
+                                <td>{{ student.typeEtudiant}}</td>
+                                <td><a href="" /></a></td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

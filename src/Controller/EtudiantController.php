@@ -18,8 +18,10 @@
         public function index(EtudiantRepository $studentRepository) 
         {
             $student = new Etudiant();
+            $students = $studentRepository->findAll();
             $form = $this->createForm(EtudiantType::class,$student);
             return $this->render('etudiant/etudiant.html.twig', [
+                'students' =>  compact("students"),
                 'formCreateStudent' => $form->createView(),
             ]);
         }
@@ -47,6 +49,7 @@
             }
             return $this->render('etudiant/etudiant.html.twig', [
                 'formCreateStudent' => $form->createView(),
+                'students' => $students
             ]);
         }
     }

@@ -12,16 +12,13 @@
                 </div>
                 <div class="modal-body"> 
                     {{ form_start (chambreForm) }}
-                            {{ form_row (chambreForm.numChambre) }} 
-                            {{ form_row (chambreForm.numBatiment) }} 
-
-                            {{ form_row (chambreForm.type) }}
-
+                        {{ form_row (chambreForm.numChambre) }} 
+                        {{ form_row (chambreForm.numBatiment) }} 
+                        {{ form_row (chambreForm.type) }}
                         <div class="d-flex justify-content-around">
                             <button type="submit" class="btn btn-primary" id="ajouter" name="ajouter">Ajouter</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
                         </div>
-
                     {{ form_end (chambreForm) }}
                 </div>
                 <div class="modal-footer"> </div>
@@ -33,8 +30,8 @@
         <div class="d-flex justify-content-center mt-1">
             <button type="addRoom" name="" id="" class="btn btn-primary" href="" role="button" data-toggle="modal" data-target="#setType"> Ajouter une nouvelle chambre</button>
         </div>
-        <div class="card-body table-responsive-sm" id="scrollable">
-            <table class="table table-striped">
+        <div class="card-body" id="">
+            <table class="table table-striped " id="roomsTable" style="width:100%">
                 <thead>
                 <tr>
                     <th scope="col">Numero Chambre</th>
@@ -54,10 +51,6 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <div class="d-flex justify-content-around">
-                <button type="button" class="btn btn-primary" id="previous">Precedent</button>
-                <button type="button" class="btn btn-primary" id="next">Suivant</button>
-            </div>
         </div>
     </div>
 {% endblock %}

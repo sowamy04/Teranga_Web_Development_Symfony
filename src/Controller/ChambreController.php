@@ -5,9 +5,11 @@ namespace App\Controller;
 use App\Entity\Chambre;
 use App\Form\ChambreType;
 use App\Repository\ChambreRepository;
+use App\Repository\EtudiantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ChambreController extends AbstractController
@@ -27,13 +29,25 @@ class ChambreController extends AbstractController
         ]);
     }
     /**
+     * @Route("/chambre/{id<\d+>}/isRoomEmpty", name="is_room_empty",methods={"POST"})
+     */
+    public function isRoomEmpty(EtudiantRepository $studentRepository,Chambre $room) {
+        $student = $studentRepository->findOneBy([
+            "chambre" => $room
+        ]);
+        $status = ["message" => ""];
+        if($student){
+            $status["message"] = "occuped";
+        }else {
+            $status["message"] = "empty";
+        }
+        return new JsonResponse(json_encode($status));
+    }
+    /**
      * @Route("/chambre/{id<\d+>}/delete", name="delete_room")
      */
     public function delete(EntityManagerInterface $em,Chambre $room)
     {
-        // if($room->getEtudiant()){
-        //     dd($room->getEtudiant()[0]->getNom());
-        // }
         $em->remove($room);
         $em->flush();
         return $this->redirectToRoute("chambre");

@@ -4,6 +4,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use App\Repository\EtudiantRepository;
+use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -41,14 +42,24 @@ class Etudiant
      * @Assert\Regex(pattern="/^(002217|7)(0|7|8){1}[0-9]{7}/", message="Un nummero valide est sous la forme 7xxxxxxxx") 
      */
     private $telephone;
-
+    
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Range(
+     *      min = "now -80 years UTC",
+     *      max = "-16 years UTC",
+     *      notInRangeMessage = "Votre date de naissance doit être comprise entre {{ min }} et {{ max }}",
+     *  )
      */
     private $dateNaissance;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Range(
+     *      min = "now -10 years UTC",
+     *      max = "now UTC",
+     *      notInRangeMessage = "Votre date d'inscription doit etre comprise entre {{ min }} et {{ max }}",
+     *  )
      */
     private $dateInscription;
 
@@ -68,7 +79,7 @@ class Etudiant
     private $adresse;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Chambre::class, inversedBy="etudiants")
+     * @ORM\ManyToOne(targetEntity=Chambre::class, inversedBy="etudiant")
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $chambre;

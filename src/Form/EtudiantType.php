@@ -59,7 +59,18 @@ class EtudiantType extends AbstractType
             ])
             ->add("chambre",EntityType::class,[
                 "class" => Chambre::class,
-                "choice_label" => "numChambre"
+                "choice_label" => function ($room) {
+                    if($room->getType() == "individuelle"){
+                        if(count($room->getEtudiant()) < 1){
+                            return $room->getNumChambre();
+                        }
+                    }else if($room->getType() == "commune"){
+                        if(count($room->getEtudiant()) < 2){
+                            return $room->getNumChambre();
+                        }
+                    }
+                },
+                'placeholder' => 'Choose a room number'
             ])
         ;
     }
