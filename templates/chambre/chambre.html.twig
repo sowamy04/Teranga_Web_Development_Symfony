@@ -7,24 +7,22 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title">Enregister une chambre</h1>
+                <h1 class="modal-title">Enregistrement chambre</h1>
                 <button type="button" class="close" data-dismiss="modal">x</button>
             </div>
-            <div class="modal-body"> 
+            <div class="modal-body">
                 {{ form_start (chambreForm) }}
                         {{ form_row (chambreForm.numChambre) }} 
                         {{ form_row (chambreForm.numBatiment) }} 
-
-                        {{ form_row (chambreForm.type) }}
+                        {{ form_row (chambreForm.type) }} 
 
                      <div class="d-flex justify-content-around">
-                        <button type="submit" class="btn btn-primary" id="ajouter" name="ajouter">Ajouter</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                        <input type="submit" value="Ajouter" class="btn btn-primary" id="ajouter"/>
+                        <button type="reset" class="btn btn-danger" data-dismiss="modal">Annuler</input>
                     </div>
 
                 {{ form_end (chambreForm) }}
             </div>
-            <div class="modal-footer"> </div>
         </div>
     </div>
 </div>
@@ -54,3 +52,5 @@
     </div>
 </div>
 {% endblock %}
+
+

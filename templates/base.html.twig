@@ -127,9 +127,24 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
         {% block javascripts %}
-        
-        {% endblock %}
+
+            <script> 
+            $(document).ready(function(){
+                $("#chambre_numBatiment").blur(function(){
+                    if ( $("#chambre_numBatiment").val() <= 9){
+                        var chambre = "00" + $("#chambre_numBatiment").val() + Math.floor(Math.random() * (9999-1000+1) +1000);
+                    }
+                    else{
+                        var chambre = "0" + $("#chambre_numBatiment").val() + Math.floor(Math.random() * (9999-1000+1) +1000);
+                    }
+                    $("#chambre_numChambre").val(chambre);
+                });   
+            });
+    </script>
+            
+        {% endblock %} 
     </body>
 </html>

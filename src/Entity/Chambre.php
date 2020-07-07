@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\ChambreRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,13 +24,16 @@ class Chambre
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotNull
      */
     private $type;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=3)
+     * @Assert\NotNull 
      */
     private $numBatiment;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,12 +63,12 @@ class Chambre
         return $this;
     }
 
-    public function getNumBatiment(): ?int
+    public function getNumBatiment(): ?string
     {
         return $this->numBatiment;
     }
 
-    public function setNumBatiment(int $numBatiment): self
+    public function setNumBatiment(string $numBatiment): self
     {
         $this->numBatiment = $numBatiment;
 
