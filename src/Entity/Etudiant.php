@@ -5,10 +5,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use App\Repository\EtudiantRepository;
 use Symfony\Component\Validator\Constraints\Range;
+use Symfony\Component\Validator\Constraints\Unique;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=EtudiantRepository::class)
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     errorPath="email",
+ *     message="Cet email : {{ value }} est déjà utilisé."
+ * )
  */
 class Etudiant
 {
@@ -32,7 +39,7 @@ class Etudiant
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,unique=true)
      * @Assert\Regex(pattern="/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/", message="Un email valide est sous la forme exemple@exemple.com") 
      */
     private $email;
