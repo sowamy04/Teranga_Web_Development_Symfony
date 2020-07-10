@@ -20,7 +20,9 @@ class ChambreController extends AbstractController
     public function index(ChambreRepository $chambreRepositoy)
     {
         $chambre = new Chambre();
-        $rooms = $chambreRepositoy->findAll();
+        $rooms = $chambreRepositoy->findBy([
+            "deleted" => false
+        ]);
         $form= $this->createForm(ChambreType::class, $chambre);
         return $this->render('chambre/chambre.html.twig', [
             'controller_name' => 'ChambreController',
@@ -48,7 +50,7 @@ class ChambreController extends AbstractController
      */
     public function delete(EntityManagerInterface $em,Chambre $room)
     {
-        $em->remove($room);
+        $room->setDeleted(true);
         $em->flush();
         return $this->redirectToRoute("chambre");
     }
@@ -58,7 +60,9 @@ class ChambreController extends AbstractController
     public function update(Request $request,ChambreRepository $chambreRepositoy,EntityManagerInterface $em,Chambre $room)
     {
         
-        $rooms = $chambreRepositoy->findAll();
+        $rooms = $chambreRepositoy->findBy([
+            "deleted" => false
+        ]);
         $form= $this->createForm(ChambreType::class, $room);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

@@ -42,6 +42,11 @@ class Chambre
      */
     private $etudiant;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $deleted;
+
     public function __construct()
     {
         $this->etudiant = new ArrayCollection();
@@ -114,6 +119,18 @@ class Chambre
                 $etudiant->setChambre(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDeleted(): ?bool
+    {
+        return $this->deleted;
+    }
+
+    public function setDeleted(bool $deleted): self
+    {
+        $this->deleted = $deleted;
 
         return $this;
     }
