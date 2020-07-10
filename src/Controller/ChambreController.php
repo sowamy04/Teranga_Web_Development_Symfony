@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ChambreController extends AbstractController
 {
     /**
-     * @Route("/", name="chambre")
+     * @Route("/chambre", name="chambre")
      */
     public function index(ChambreRepository $chambreRepositoy)
     {
